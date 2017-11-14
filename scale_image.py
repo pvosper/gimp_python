@@ -10,6 +10,7 @@ def scale_image(image, max):
     else:
         scale = float(max) / image.height
 
+    pdb.gimp_context_set_interpolation(3)    # INTERPOLATION-LANCZOS (3)
     pdb.gimp_image_scale(image, image.width*scale, image.height*scale)
 
     return
@@ -17,7 +18,7 @@ def scale_image(image, max):
 
 register(
     "scale_image",                          # proc_name called from command line
-    "Scale image within max bounds",            # info about plug-in
+    "Scale image within max bounds",        # info about plug-in
     "Scales image within specified maximum bounds while maintaining original aspect ratio",                         # help
     "Paul Vosper",                          # author
     "Paul Vosper",                          # copyright holder for the plug-in
