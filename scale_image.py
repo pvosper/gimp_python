@@ -12,6 +12,8 @@ def scale_image(image, max):
 
     pdb.gimp_context_set_interpolation(3)    # INTERPOLATION-LANCZOS (3)
     pdb.gimp_image_scale(image, image.width*scale, image.height*scale)
+    # pdb.plug_in_unsharp_mask(1, image, 5.0, 0.5, 0.0)   #TypeError: wrong parameter type
+    #run-mode, image (unused), drawable, radius (in pixels), amount (strength of effect), threshold
 
     return
 
