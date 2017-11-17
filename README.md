@@ -9,12 +9,12 @@
 - Scale pictures using Sinc/Lanczos, then filter using Unsharp Mask
 
 plug-in-unsharp_mask
-- run-mode
-- image (unused)
-- drawable
-- radius (in pixels)
-- amount (strength of effect)
-- threshold
+- run-mode int32
+- image image (unused)
+- drawable drawable
+- radius float (in pixels)
+- amount float (strength of effect)
+- threshold int32
 
 gimp-context-set-interpolation
 - INTERPOLATION-NONE (0)
@@ -40,6 +40,11 @@ gimp-context-set-interpolation
 Method must match register
 
 $todo python version demo
+
+image info
+renamer
+writing out images
+
 
 You can put things in an existing menu:
 

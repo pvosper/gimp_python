@@ -3,7 +3,7 @@
 from gimpfu import *
 
 
-def scale_image(image, max):
+def scale_image(image, draw, max):
 
     if image.width > image.height:
         scale = float(max) / image.width
@@ -12,10 +12,13 @@ def scale_image(image, max):
 
     pdb.gimp_context_set_interpolation(3)    # INTERPOLATION-LANCZOS (3)
     pdb.gimp_image_scale(image, image.width*scale, image.height*scale)
-    # pdb.plug_in_unsharp_mask(1, image, 5.0, 0.5, 0.0)   #TypeError: wrong parameter type
-    #run-mode, image (unused), drawable, radius (in pixels), amount (strength of effect), threshold
+    pdb.plug_in_unsharp_mask(image, draw, 5.0, 0.5, 0)
+    # (xrun-mode), image (unused), drawable, radius (in pixels), amount (strength of effect), threshold
 
-    gimp.message("Interpolation: " + str(pdb.gimp_context_get_interpolation()) + "\n")
+    interpolation = ["none", "linear", "cubic", "lanczos"]
+    int_str = interpolation[pdb.gimp_context_get_interpolation()]
+
+    gimp.message("Interpolation: " + int_str + "\n")
 
     return
 
@@ -31,6 +34,7 @@ register(
     "*",                                    # image types ie: RGB*, GRAY* &etc
     [
         (PF_IMAGE, "image", "Input image", None),
+        (PF_DRAWABLE, "draw", "Drawable", None),
         (PF_INT, "max", "Max?", 320)
     ],                                      # method parameters
     [],                                     # method results
