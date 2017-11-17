@@ -30,7 +30,9 @@ gimp-context-set-interpolation
         - ? So what's the bang node for? Won't load unless #!/usr/bin/env python
     - MacOSX High Sierra
         - Python 2.7.4
-    - Env should be using Python 3.6
+    - '\env' should be using Python 3.6
+        - python terminal_python_version.py prints 3.6.1
+
 - Reliance on open image file
 - Image vs Drawable
 - Help not displaying
