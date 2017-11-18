@@ -20,12 +20,10 @@ def scale_image(image, draw, max):
 
     # pdb.file_jpeg_save(timg, tdrawable, timg.name + ".jpg", timg.name + ".jpg", 0.9, 0, 0, 0, "", 0, 0, 0, 0)
 
-    # pdb.gimp_file_save(image, draw, 'test.png', '?')
-    # RuntimeError: Could
-    # not open
-    # 'test.png'
-    # for writing: Permission
-    # denied
+    # pdb.gimp_file_save(image, draw, 'test.xcf', '?')
+    # RuntimeError: Could not open 'test.png' for writing: Permission denied
+
+    # pdb.file_png_save_defaults(image, draw, '~/test.png', '?')
 
     # gimp.message("Interpolation: " + int_str + "\n")
 

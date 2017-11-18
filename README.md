@@ -112,3 +112,13 @@ TypeError: unsupported operand type(s) for /: 'int' and 'gimp.PDBFunction'
     pdb.plug_in_unsharp_mask(1, image, 5.0, 0.5, 0.0)
 TypeError: wrong parameter type
 ```
+
+```Traceback (most recent call last):
+  File "/Applications/GIMP.app/Contents/Resources/lib/gimp/2.0/python/gimpfu.py", line 736, in response
+    dialog.res = run_script(params)
+  File "/Applications/GIMP.app/Contents/Resources/lib/gimp/2.0/python/gimpfu.py", line 361, in run_script
+    return apply(function, params)
+  File "/Users/paulvosper/Library/Application Support/GIMP/2.8/plug-ins/scale_image.py", line 23, in scale_image
+    pdb.gimp_file_save(image, draw, 'test.xcf', '?')
+RuntimeError: Could not open 'test.xcf' for writing: Permission denied
+```
