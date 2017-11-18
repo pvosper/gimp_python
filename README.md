@@ -22,6 +22,19 @@ gimp-context-set-interpolation
 - INTERPOLATION-CUBIC (2)
 - INTERPOLATION-LANCZOS (3) }
 
+gimp-image-get-filename
+
+https://stackoverflow.com/questions/26803732/how-do-i-save-export-all-layers-with-gimps-script-fu
+
+pdb.gimp_file_save(img, background_layer, '/temp/tq84_write_text.png', '?')
+by
+
+new_image = pdb.gimp_image_duplicate(img)
+layer = pdb.gimp_image_merge_visible_layers(new_image, CLIP_TO_IMAGE)
+pdb.gimp_file_save(new_img, layer, '/temp/tq84_write_text.png', '?')
+pdb.gimp_image_delete(new_image)
+(The last call just "deletes" the new image from program memory, freeing up the resources, of course)
+
 ## WTF
 
 - Python versions

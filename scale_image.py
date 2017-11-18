@@ -18,7 +18,16 @@ def scale_image(image, draw, max):
     interpolation = ["none", "linear", "cubic", "lanczos"]
     int_str = interpolation[pdb.gimp_context_get_interpolation()]
 
-    gimp.message("Interpolation: " + int_str + "\n")
+    # pdb.file_jpeg_save(timg, tdrawable, timg.name + ".jpg", timg.name + ".jpg", 0.9, 0, 0, 0, "", 0, 0, 0, 0)
+
+    # pdb.gimp_file_save(image, draw, 'test.png', '?')
+    # RuntimeError: Could
+    # not open
+    # 'test.png'
+    # for writing: Permission
+    # denied
+
+    # gimp.message("Interpolation: " + int_str + "\n")
 
     return
 
