@@ -21,7 +21,7 @@ def scale_image(image, draw, max):
     # pdb.file_jpeg_save(timg, tdrawable, timg.name + ".jpg", timg.name + ".jpg", 0.9, 0, 0, 0, "", 0, 0, 0, 0)
 
     # pdb.gimp_file_save(image, draw, '~/temp/test.xcf', '~/temp/test.xcf')
-    pdb.file_png_save(image, draw, 'temp.png', 'temp.png', 0, 9, 1, 1, 1, 1, 1)
+    pdb.file_png_save(image, draw, '/Users/paulvosper/temp/temp.png', 'temp.png', 0, 9, 1, 1, 1, 1, 1)
     # pdb.gimp_file_save(images[i], images[i].active_layer, filename, filename)
     # RuntimeError: Could not open 'test.png' for writing: Permission denied
 
