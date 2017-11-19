@@ -1,28 +1,30 @@
 #!/usr/bin/env python
 
-"""Testing which version of Python gets run inside Gimp"""
+
+"""Display current working directory for debugging"""
+
 
 from gimpfu import *
-import platform
+import os
 
+def display_cwd():
 
-def python_version():
-    version = "Python Version: " + platform.python_version() + "\n"
-    gimp.message(version)
+    current_working_directory = "Current Working Directory: " + os.getcwd() + "\n"
+    gimp.message(current_working_directory)
 
 
 register(
-    "python_version",       # proc_name called from cmd line
+    "display_cwd",          # proc_name called from cmd line
     "blurb",                # info about plug-in
     "help message",         # help
     "author",               # author
     "copyright",            # copyright holder for the plug-in
     "year",                 # copyright date
-    "Python Version",       # label that the plug-in uses in the menu
+    "Current Working Directory",       # label that the plug-in uses in the menu
     "*",                    # image types ie, RGB*, GRAY* &etc
     [],                     # method parameters (type, name, description, default [, extra]).
     [],                     # method results
-    python_version,         # name of method that will be called
+    display_cwd,            # name of method that will be called
     menu="<Image>/Local")   # location in menu bar
 
 main()
