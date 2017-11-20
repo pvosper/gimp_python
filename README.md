@@ -24,6 +24,8 @@ gimp-context-set-interpolation
 
 gimp-image-get-filename
 
+http://www.pygtk.org
+
 https://stackoverflow.com/questions/26803732/how-do-i-save-export-all-layers-with-gimps-script-fu
 
 pdb.gimp_file_save(img, background_layer, '/temp/tq84_write_text.png', '?')

@@ -3,64 +3,40 @@
 from gimpfu import *
 
 
-def web_image_toolbox(number, angle, word, text, bgcolor,
-               newimg, newlayer, channel, drawable,
-               shadowp, ascendingp, imgfmt, option,
-               size, opacity, imagefile, dir,
-               font, brush, pattern, gradient, palette ) :
+def web_toolbox(image, drawable, maximum_dimension, path, filename):
+
+    if image.width > image.height:
+        scale = float(maximum_dimension) / image.width
+    else:
+        scale = float(maximum_dimension) / image.height
+
+    pdb.gimp_context_set_interpolation(3)
+    pdb.gimp_image_scale(image, image.width*scale, image.height*scale)
+    pdb.plug_in_unsharp_mask(image, drawable, 5.0, 0.5, 0)
+
+    pdb.file_png_save(image, drawable, '/Users/paulvosper/temp/temp.png', 'temp.png', 0, 9, 1, 1, 1, 1, 1)
+
     return
 
+
 register(
-    "web_image_toolbox",
-    "Simple tools for processing web images",
-    "Longer description of doing stuff",
-    "Your Name",
-    "Your Name",
-    "2010",
-    "Web Image Toolbox",
-    "",      # Alternately use RGB, RGB*, GRAY*, INDEXED etc.
+    "web_toolbox",                          # proc_name called from command line
+    "Scale image within max bounds",        # info about plug-in
+    "Scales image within specified maximum bounds while maintaining original aspect ratio",                         # help
+    "Paul Vosper",                          # author
+    "Paul Vosper",                          # copyright holder for the plug-in
+    "2017",                                 # copyright date
+    "Web Toolbox",                          # label that the plug-in uses in the menu
+    "*",                                    # image types ie: RGB*, GRAY* &etc
     [
-        (PF_INT, "number", "Number?", 50),
-        (PF_FLOAT, "angle", "Angle", 3.14159),
-        # you can also use PF_INT8, PF_INT16, PF_INT32
-        (PF_STRING, "word", "Word", "Zebrafish!"),
-        # PF_VALUE is another term for PF_STRING
-        (PF_TEXT, "text", "Some Text",
-          "The quick red fox jumped over the lazy dog"),
-
-        (PF_COLOR, "bg-color", "Background", (1.0, 1.0, 1.0)),
-        # or you can spell it PF_COLOUR
-
         (PF_IMAGE, "image", "Input image", None),
-        (PF_LAYER, "layer", "Input layer", None),
-        (PF_CHANNEL, "channel", "Which channel", None),
-        (PF_DRAWABLE, "drawable", "Input drawable", None),
-
-        (PF_TOGGLE, "shadow", "Shadow?", 1),
-        (PF_BOOL,   "ascending", "_Ascending", True),
-        (PF_RADIO, "imagefmt", "Image format", "jpg",
-          (("png", "png"), ("jpg", "jpg"))),
-        (PF_OPTION, "option", "Option", 2, ("Mouse", "Cat", "Dog", "Horse")),
-
-        (PF_SPINNER, "size", "Pixel Size", 50, (1, 8000, 1)),
-        (PF_SLIDER, "opacity",  "Op_acity", 100, (0, 100, 1)),
-        # (PF_ADJUSTMENT is the same as PF_SPINNER
-
-        (PF_FILE, "imagefile", "Image file", ""),
-        (PF_DIRNAME, "dir", "Directory", "/tmp"),
-
-        (PF_FONT, "font", "Font", "Sans"),
-        (PF_BRUSH, "brush", "Brush", None),
-        (PF_PATTERN, "pattern", "Pattern", None),
-        (PF_GRADIENT, "gradient", "Gradient", None),
-        (PF_PALETTE, "palette",  "Palette", ""),
-
-        # New items that don't quite work yet:
-        #(PF_VECTORS, "vectors", "Vectors", None),
-        #(PF_DISPLAY, "display", "Display", None),
-    ],
-    [],
-    web_image_toolbox,
-    menu="<Image>/Local" )
+        (PF_DRAWABLE, "drawable", "Input layer", None),
+        (PF_INT, "maximum_dimension", "Max?", 320),
+        (PF_STRING, "path", "Path", "A Path"),
+        (PF_STRING, "filename", "Filename", "A File Name"),
+    ],                                      # method parameters
+    [],                                     # method results
+    web_toolbox,                            # name of method that will be called
+    menu="<Image>/Local")                   # location in menu bar
 
 main()
