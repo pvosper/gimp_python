@@ -1,5 +1,12 @@
 #!/usr/bin/env python
 
+"""Image scaling for display on presonal web site
+    1280 - Enlarge
+    640 - Page
+    320 - Index
+    180 - Thumbnail
+    Each should be derived from original (not chained)"""
+
 from gimpfu import *
 
 
@@ -21,7 +28,7 @@ def web_toolbox(image, drawable, maximum_dimension, path, filename):
 
 register(
     "web_toolbox",                          # proc_name called from command line
-    "Scale image within max bounds",        # info about plug-in
+    "Creates PNG files at standard dimensions", # info about plug-in
     "Scales image within specified maximum bounds while maintaining original aspect ratio",                         # help
     "Paul Vosper",                          # author
     "Paul Vosper",                          # copyright holder for the plug-in
