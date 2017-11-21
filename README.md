@@ -2,29 +2,22 @@
 
 - Export web images within project standards:
     - Source 4000 x 3000
-    - Display (<= 1280 x 960)
-    - Index (<= 320 x 240)
-    - Thumbnail (<= 180 x 240)
+    - Index (<= 512 x 512)
+    - Display (<= 1024 x 1024)
+    - Zoom (<= 2048 x 2048)
     
 - Scale pictures using Sinc/Lanczos, then filter using Unsharp Mask
 
-plug-in-unsharp_mask
-- run-mode int32
-- image image (unused)
-- drawable drawable
-- radius float (in pixels)
-- amount float (strength of effect)
-- threshold int32
 
-gimp-context-set-interpolation
-- INTERPOLATION-NONE (0)
-- INTERPOLATION-LINEAR (1)
-- INTERPOLATION-CUBIC (2)
-- INTERPOLATION-LANCZOS (3) }
+## References
 
-gimp-image-get-filename
+- http://gimpbook.com/index.html -- Excellent reference by Akkana Peck
+- http://gimpbook.com/scripting/notes.html
+- https://www.ibm.com/developerworks/library/os-autogimp/index.html -- Outdated, but good reference
+- http://www.pygtk.org
 
-http://www.pygtk.org
+
+## Notes
 
 https://stackoverflow.com/questions/26803732/how-do-i-save-export-all-layers-with-gimps-script-fu
 
@@ -36,6 +29,7 @@ layer = pdb.gimp_image_merge_visible_layers(new_image, CLIP_TO_IMAGE)
 pdb.gimp_file_save(new_img, layer, '/temp/tq84_write_text.png', '?')
 pdb.gimp_image_delete(new_image)
 (The last call just "deletes" the new image from program memory, freeing up the resources, of course)
+
 
 ## WTF
 
@@ -51,14 +45,6 @@ pdb.gimp_image_delete(new_image)
 - Reliance on open image file
 - Image vs Drawable
 - Help not displaying
-
-Method must match register
-
-$todo python version demo
-
-image info
-renamer
-writing out images
 
 
 You can put things in an existing menu:
@@ -77,7 +63,6 @@ Or even create your own tab:
 This will create a custom "Python-Fu" menu, not add it to the existing one:
 
     menu="<Image>/Filters/Python-Fu")
-
 
 
 ### Error Examples
