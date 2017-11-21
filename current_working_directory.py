@@ -9,8 +9,12 @@ import os
 
 def display_cwd():
 
-    current_working_directory = "Current Working Directory: " + os.getcwd() + "\n"
-    gimp.message(current_working_directory)
+    working_dir = os.getcwd()
+    home_dir = os.path.expanduser('~')
+
+    display_text = "Current Working Directory: " + working_dir + "\nHome: " + home_dir + "\n"
+
+    gimp.message(display_text)
 
 
 register(

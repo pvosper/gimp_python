@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-"""Image scaling for display on presonal web site
+"""Image scaling for display on personal web site
     1280 - Enlarge
     640 - Page
     320 - Index
@@ -8,16 +8,21 @@
     Each should be derived from original (not chained)"""
 
 from gimpfu import *
+import os
 
+# todo: This is valid for OSX, but not cross-platform
+home_dir = os.path.expanduser('~')
 
-def web_toolbox(image, drawable, maximum_dimension, path, filename):
+def web_toolbox(image, drawable, maximum_dimension, path, filename, ind_scale_factor, dis_scale_factor, zoo_scale_factor, dir):
+
+    # todo: Loop through sizes, naming each uniquely
 
     # Create working image for destructive manipulation
     working_image = pdb.gimp_image_duplicate(image)
     working_layer = pdb.gimp_image_merge_visible_layers(working_image, CLIP_TO_IMAGE)
 
     # Create scale factor to fit working image
-    # todo rectangular limits as option, rather than square
+    # todo: Use rectangular limits (ie, width != height) as option, rather than square
     if working_image.width > working_image.height:
         scale = float(maximum_dimension) / working_image.width
     else:
@@ -31,6 +36,7 @@ def web_toolbox(image, drawable, maximum_dimension, path, filename):
     # Export working image as PNG
     pdb.file_png_save(working_image, working_layer, '/Users/paulvosper/temp/temp.png', 'temp.png', 0, 9, 1, 1, 1, 1, 1)
 
+    # Clean up working image
     pdb.gimp_image_delete(working_image)
 
     return
@@ -48,8 +54,12 @@ register(
     [
         (PF_IMAGE, "image", "Input image", None),
         (PF_DRAWABLE, "drawable", "Input layer", None),
+        (PF_INT, "ind_scale_factor", "Index?", 512),
+        (PF_INT, "dis_scale_factor", "Display?", 1024),
+        (PF_INT, "zoo_scale_factor", "Zoom?", 2048),
         (PF_INT, "maximum_dimension", "Max?", 320),
         (PF_STRING, "path", "Path", "A Path"),
+        (PF_DIRNAME, "dir", "Directory", home_dir),
         (PF_STRING, "filename", "Filename", "A File Name"),
     ],                                      # method parameters
     [],                                     # method results
