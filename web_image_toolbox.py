@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
 """Image scaling for display on personal web site
-    2048 - Zoom
-    1024 - Display
-    512 - Index
+    2048 - Zoom (_zoo)
+    1024 - Display (_dis)
+    512 - Index (_ind)
     Each should be derived from original (not chained)"""
 
 from gimpfu import *
@@ -16,7 +16,7 @@ home_dir = os.path.expanduser('~')
 def web_toolbox(image, drawable, project, title):
     # 'Specify as many input parameters as there are in the plugin_func and in the same order'
 
-    export_sizes = [('zoom', 2048), ('display', 1024), ('index', 512)]
+    export_sizes = [('zoo', 2048), ('dis', 1024), ('ind', 512)]
 
     for export in export_sizes:
 
@@ -43,7 +43,6 @@ def web_toolbox(image, drawable, project, title):
         export_file_path = home_dir + '/temp/'
         # todo user-selectable path
         export_file_name = project + '_' + name + size_label + '.png'
-        # todo project prepended to name
         export_file = export_file_path + export_file_name
 
         # Export working image as PNG
