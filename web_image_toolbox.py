@@ -13,7 +13,7 @@ import os
 # todo: This is valid for OSX, but not cross-platform
 home_dir = os.path.expanduser('~')
 
-def web_toolbox(image, drawable, name):
+def web_toolbox(image, drawable, project, title):
     # 'Specify as many input parameters as there are in the plugin_func and in the same order'
 
     export_sizes = [('zoom', 2048), ('display', 1024), ('index', 512)]
@@ -24,6 +24,7 @@ def web_toolbox(image, drawable, name):
         working_image = pdb.gimp_image_duplicate(image)
         working_layer = pdb.gimp_image_merge_visible_layers(working_image, CLIP_TO_IMAGE)
 
+        size_label = '_' + export[0]
         maximum_dimension = export[1]
 
         # Create scale factor to fit working image
@@ -40,7 +41,9 @@ def web_toolbox(image, drawable, name):
 
         # File & path
         export_file_path = home_dir + '/temp/'
-        export_file_name = name + '_' + export[0] + '.png'
+        # todo user-selectable path
+        export_file_name = project + '_' + name + size_label + '.png'
+        # todo project prepended to name
         export_file = export_file_path + export_file_name
 
         # Export working image as PNG
@@ -64,7 +67,8 @@ register(
     [
         (PF_IMAGE, "image", "Input image", None),
         (PF_DRAWABLE, "drawable", "Input layer", None),
-        (PF_STRING, "name", "File Name", "temp_filename"),
+        (PF_STRING, "project", "File Name", "temp_project"),
+        (PF_STRING, "title", "File Name", "temp_filename"),
     ],                                      # method parameters
     [],                                     # method results
     web_toolbox,                            # name of method that will be called
