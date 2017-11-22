@@ -15,6 +15,7 @@
 - http://gimpbook.com/scripting/notes.html
 - https://www.ibm.com/developerworks/library/os-autogimp/index.html -- Outdated, but good reference
 - http://www.pygtk.org
+- http://sappersblog.blogspot.com/2017/06/writing-gimp-python-plug-ins.html
 
 
 ## Notes
@@ -32,6 +33,9 @@ pdb.gimp_image_delete(new_image)
 
 
 ## WTF
+
+Argh: PF_DIRNAME and PF_STRING are returning "wrong" values
+>"Specify as many input parameters as there are in the plugin_func and in the same order."
 
 - Python versions
     - GIMP 2.8.22 Python Console

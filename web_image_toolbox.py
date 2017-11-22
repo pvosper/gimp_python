@@ -10,16 +10,20 @@
 from gimpfu import *
 import os
 
+# This can be used for method parameters
 # todo: This is valid for OSX, but not cross-platform
 home_dir = os.path.expanduser('~')
 
-def web_toolbox(image, drawable, maximum_dimension, path, filename, ind_scale_factor, dis_scale_factor, zoo_scale_factor, dir):
+def web_toolbox(image, drawable, name):
+    # 'Specify as many input parameters as there are in the plugin_func and in the same order'
 
     # todo: Loop through sizes, naming each uniquely
 
     # Create working image for destructive manipulation
     working_image = pdb.gimp_image_duplicate(image)
     working_layer = pdb.gimp_image_merge_visible_layers(working_image, CLIP_TO_IMAGE)
+
+    maximum_dimension = 320
 
     # Create scale factor to fit working image
     # todo: Use rectangular limits (ie, width != height) as option, rather than square
@@ -33,8 +37,13 @@ def web_toolbox(image, drawable, maximum_dimension, path, filename, ind_scale_fa
     pdb.gimp_image_scale(working_image, working_image.width*scale, working_image.height*scale)
     pdb.plug_in_unsharp_mask(working_image, working_layer, 5.0, 0.5, 0)
 
+    # File & path
+    export_file_path = home_dir + '/temp/'
+    export_file_name = name + '.png'
+    export_file = export_file_path + export_file_name
+
     # Export working image as PNG
-    pdb.file_png_save(working_image, working_layer, '/Users/paulvosper/temp/temp.png', 'temp.png', 0, 9, 1, 1, 1, 1, 1)
+    pdb.file_png_save(working_image, working_layer, export_file, export_file_name, 0, 9, 1, 1, 1, 1, 1)
 
     # Clean up working image
     pdb.gimp_image_delete(working_image)
@@ -54,13 +63,7 @@ register(
     [
         (PF_IMAGE, "image", "Input image", None),
         (PF_DRAWABLE, "drawable", "Input layer", None),
-        (PF_INT, "ind_scale_factor", "Index?", 512),
-        (PF_INT, "dis_scale_factor", "Display?", 1024),
-        (PF_INT, "zoo_scale_factor", "Zoom?", 2048),
-        (PF_INT, "maximum_dimension", "Max?", 320),
-        (PF_STRING, "path", "Path", "A Path"),
-        (PF_DIRNAME, "dir", "Directory", home_dir),
-        (PF_STRING, "filename", "Filename", "A File Name"),
+        (PF_STRING, "name", "File Name", "temp_filename"),
     ],                                      # method parameters
     [],                                     # method results
     web_toolbox,                            # name of method that will be called
