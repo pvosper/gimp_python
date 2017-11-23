@@ -6,15 +6,17 @@
     512 - Index (_ind)
     Each should be derived from original (not chained)"""
 
+
 from gimpfu import *
 import os
+
 
 # This can be used for method parameters
 # todo: This is valid for OSX, but not cross-platform
 home_dir = os.path.expanduser('~')
 
-def web_toolbox(image, drawable, project, title):
-    # 'Specify as many input parameters as there are in the plugin_func and in the same order'
+
+def web_toolbox(image, drawable, project, title, dir):
 
     export_sizes = [('zoo', 2048), ('dis', 1024), ('ind', 512)]
 
@@ -39,7 +41,7 @@ def web_toolbox(image, drawable, project, title):
         pdb.gimp_image_scale(working_image, working_image.width*scale, working_image.height*scale)
         pdb.plug_in_unsharp_mask(working_image, working_layer, 5.0, 0.5, 0)
 
-        # File & path
+        # Define file & path
         export_file_path = home_dir + '/temp/'
         # todo user-selectable path
         export_file_name = project + '_' + name + size_label + '.png'
@@ -56,8 +58,8 @@ def web_toolbox(image, drawable, project, title):
 
 register(
     "web_toolbox",                          # proc_name called from command line
-    "Creates PNG files at standard dimensions", # info about plug-in
-    "Scales image within specified maximum bounds while maintaining original aspect ratio",                         # help
+    "Creates multiple PNG files for web use",   # info about plug-in
+    "Creates multiple PNG files for web use",   # help
     "Paul Vosper",                          # author
     "Paul Vosper",                          # copyright holder for the plug-in
     "2017",                                 # copyright date
@@ -66,8 +68,9 @@ register(
     [
         (PF_IMAGE, "image", "Input image", None),
         (PF_DRAWABLE, "drawable", "Input layer", None),
-        (PF_STRING, "project", "File Name", "temp_project"),
-        (PF_STRING, "title", "File Name", "temp_filename"),
+        (PF_STRING, "project", "Project:", "project"),
+        (PF_STRING, "title", "Title", "title"),
+        (PF_DIRNAME, "dir", "Directory", home_dir),
     ],                                      # method parameters
     [],                                     # method results
     web_toolbox,                            # name of method that will be called

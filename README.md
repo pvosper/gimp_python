@@ -8,14 +8,45 @@
     
 - Scale pictures using Sinc/Lanczos, then filter using Unsharp Mask
 
+## 5 things I wish I had known
+
+1. Plug-In Directory
+    - Python-Fu files are plug-ins, not scripts
+    - Defined in Preferences > Folders > Plug-Ins
+    - `/Users/paulvosper/Library/Application Support/GIMP/2.8/plug-ins`
+2. Python Version
+    - GIMP 2.8.22 uses Python 2.7.8
+    - Each file requires: `#!/usr/bin/env python`
+    - MacOSX High Sierra 10.13.1 uses Python 2.7.4
+    - Local env variable references Python 3.6.1
+    - Demonstration:
+        - `python_version.py`
+        - `terminal_python_version.py`
+3. Menu location
+    - Requires two params:
+        - `"Label", # label that the plug-in uses in the menu`
+        - `menu="<Image>/Local") # location in menu bar`
+        - ! Previous versions combined these two
+4. The number and ordering of input parameters must match
+    - Input parameters must match number and ordering of registered parameters
+    - Names do not need to match
+    - Demonstration:
+        - `input_parameters.py`
+5. GIMP 2.8.22 file saves .xcf format only
+    - IE, `pdb.gimp_file_save()` no longer respects file extension
+    - PNG &etc available as `pdb.file_png_save()`
+
+
 
 ## References
 
+#### Akkana Peck: Gimp Book
 - http://gimpbook.com/index.html -- Excellent reference by Akkana Peck
+#### Sapper what I should have known...
+- http://sappersblog.blogspot.com/2017/06/writing-gimp-python-plug-ins.html
 - http://gimpbook.com/scripting/notes.html
 - https://www.ibm.com/developerworks/library/os-autogimp/index.html -- Outdated, but good reference
 - http://www.pygtk.org
-- http://sappersblog.blogspot.com/2017/06/writing-gimp-python-plug-ins.html
 
 
 ## Notes
@@ -36,6 +67,7 @@ pdb.gimp_image_delete(new_image)
 
 Argh: PF_DIRNAME and PF_STRING are returning "wrong" values
 >"Specify as many input parameters as there are in the plugin_func and in the same order."
+- Demonstrate this!
 
 - Python versions
     - GIMP 2.8.22 Python Console
