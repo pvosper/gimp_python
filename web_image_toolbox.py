@@ -44,7 +44,7 @@ def web_toolbox(image, drawable, project, title, dir):
         # Define file & path
         export_file_path = home_dir + '/temp/'
         # todo user-selectable path
-        export_file_name = project + '_' + name + size_label + '.png'
+        export_file_name = project + '_' + title + size_label + '.png'
         export_file = export_file_path + export_file_name
 
         # Export working image as PNG
