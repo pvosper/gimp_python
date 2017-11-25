@@ -16,7 +16,7 @@ import os
 home_dir = os.path.expanduser('~')
 
 
-def web_toolbox(image, drawable, project, title, dir):
+def web_toolbox(image, drawable, project, title, dir, zoo_w, zoo_h, dis_w, dis_h, ind_w, ind_h):
 
     export_sizes = [('zoo', 2048), ('dis', 1024), ('ind', 512)]
 
@@ -71,6 +71,12 @@ register(
         (PF_STRING, "project", "Project:", "project"),
         (PF_STRING, "title", "Title", "title"),
         (PF_DIRNAME, "dir", "Directory", home_dir),
+        (PF_INT, "zoo_w", "Zoom Width", 1024),
+        (PF_INT, "zoo_h", "Zoom Height", 768),
+        (PF_INT, "dis_w", "Display Width", 1024),
+        (PF_INT, "dis_h", "Display Height", 768),
+        (PF_INT, "ind_w", "Index Width", 1024),
+        (PF_INT, "ind_h", "Index Height", 768),
     ],                                      # method parameters
     [],                                     # method results
     web_toolbox,                            # name of method that will be called
