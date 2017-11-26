@@ -18,6 +18,7 @@ home_dir = os.path.expanduser('~')
 
 def web_toolbox(image, drawable, project, title, dir, zoo_w, zoo_h, dis_w, dis_h, ind_w, ind_h):
 
+    # todo: export sizes should be optional
     export_sizes = [('zoo', zoo_w, zoo_h), ('dis', dis_w, dis_h), ('ind', ind_w, ind_h)]
 
     for export in export_sizes:
@@ -26,6 +27,7 @@ def web_toolbox(image, drawable, project, title, dir, zoo_w, zoo_h, dis_w, dis_h
         working_image = pdb.gimp_image_duplicate(image)
         working_layer = pdb.gimp_image_merge_visible_layers(working_image, CLIP_TO_IMAGE)
 
+        # Set size variables for this iteration
         size_label = '_' + export[0]
         size_width = float(export[1])
         size_height = float(export[2])
@@ -53,7 +55,7 @@ def web_toolbox(image, drawable, project, title, dir, zoo_w, zoo_h, dis_w, dis_h
         # Define file & path
         export_file_path = home_dir + '/temp/'
         # todo user-selectable path
-        # export_file_path = dir << This is not updateable through UI
+        # export_file_path = dir << This does not update through UI changes
         export_file_name = project + '_' + title + size_label + '.png'
         export_file = export_file_path + export_file_name
 
