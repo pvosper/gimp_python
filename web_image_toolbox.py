@@ -31,12 +31,7 @@ def web_toolbox(image, drawable, project, title, dir, zoo_w, zoo_h, dis_w, dis_h
         size_height = float(export[2])
 
         # Create scale factor to fit working image
-        # todo: Use rectangular limits (ie, width != height) as option, rather than square
         # Don't scale twice!
-        # if working_image.width > working_image.height:
-        #     scale = float(maximum_dimension) / working_image.width
-        # else:
-        #     scale = float(maximum_dimension) / working_image.height
         # Find scale factor for width and height - lowest will be most significant scaling
         width_scale =  size_width / working_image.width
         height_scale =  size_height / working_image.height
@@ -58,6 +53,7 @@ def web_toolbox(image, drawable, project, title, dir, zoo_w, zoo_h, dis_w, dis_h
         # Define file & path
         export_file_path = home_dir + '/temp/'
         # todo user-selectable path
+        # export_file_path = dir << This is not updateable through UI
         export_file_name = project + '_' + title + size_label + '.png'
         export_file = export_file_path + export_file_name
 
